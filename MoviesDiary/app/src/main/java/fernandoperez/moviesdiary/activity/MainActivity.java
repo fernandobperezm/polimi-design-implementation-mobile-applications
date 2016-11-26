@@ -1,9 +1,7 @@
-package com.example.fernandoperez.myapplication;
+package fernandoperez.moviesdiary.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,7 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import fernandoperez.moviesdiary.R;
+import fernandoperez.moviesdiary.utils.Commons;
+
 public class MainActivity extends AppCompatActivity {
+    public static String MESSAGE_MAIN_ACTIVITY = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,27 +22,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-    public void okClicked(View view) {
-        // We Want to retrieve the edit text when the user presses the Ok Button.
-        EditText editText = (EditText) findViewById(R.id.user_string);
-        String result = editText.getText().toString();
-
-        // Send the message (intent) to the other class.
-        Intent intent = new Intent(this,ResultsActivity.class);
-        // Add the message to the other class.
-        intent.putExtra(Commons.TEXT_EXTRA, result);
-        startActivity(intent);
-
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent();
+//
+//            }
+//        });
     }
 
     @Override
@@ -63,5 +52,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sendMessage(View view) {
+
+        EditText editText = (EditText) this.findViewById(R.id.main_edittext);
+        String message = editText.getText().toString();
+
+        Intent intent = new Intent(this, ResultsActivity.class);
+        intent.putExtra(Commons.USER_MESSAGE,message);
+
+        startActivity(intent);
     }
 }
